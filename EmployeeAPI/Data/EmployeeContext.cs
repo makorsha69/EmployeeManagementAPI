@@ -14,5 +14,6 @@ namespace EmployeeAPI.Data
 
         }
         public DbSet<Employee> Employee { get; set; }
+        public DbSet<User> User { get; set; }
     }
 }

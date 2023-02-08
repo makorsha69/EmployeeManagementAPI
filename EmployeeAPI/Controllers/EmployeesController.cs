@@ -29,7 +29,7 @@ namespace EmployeeAPI.Controllers
         }
 
         // GET: api/Employees/5
-        [HttpGet("{id}")]
+        [HttpGet("id={id}")]
         public async Task<ActionResult<Employee>> GetEmployee(int id)
         {
             var employee = await _context.Employee.FindAsync(id);
@@ -41,6 +41,21 @@ namespace EmployeeAPI.Controllers
 
             return employee;
         }
+
+        // GET: api/Employees/5
+        [HttpGet("email={email}")]
+        public async Task<ActionResult<Employee>> GetEmployeeByEmail(string email)
+        {
+            var employee = await _context.Employee.FirstOrDefaultAsync(q => q.Email == email);
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            return employee;
+        }
+
 
         // PUT: api/Employees/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
