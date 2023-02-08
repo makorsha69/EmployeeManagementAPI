@@ -80,6 +80,8 @@ namespace EmployeeAPI
 
             app.UseCors(Policy => Policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
+            app.UseAuthentication();
+
             app.UseRouting();
 
             app.UseAuthorization();

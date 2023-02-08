@@ -132,7 +132,7 @@ namespace EmployeeAPI.Controllers
         [Route("login")]
         public async Task<IActionResult> Login(Login model)
         {
-            var user =_context.User.First(a => a.Email == model.Email);
+            var user =_context.User.FirstOrDefault(a => a.Email == model.Email);
             if (user != null && model.Password == user.Password)
             {
                 var tokenDescriptor = new SecurityTokenDescriptor
@@ -158,6 +158,8 @@ namespace EmployeeAPI.Controllers
         }
         #endregion
 
+
+
         #region GetUserProfile
 
         [HttpGet("GetUserProfile")]
@@ -166,10 +168,11 @@ namespace EmployeeAPI.Controllers
         public User GetUserProfile()
         {
             string userId = User.Claims.First(c => c.Type == "UserId").Value;
-            User user = _context.User.Find(Convert.ToInt32(userId));
+            User user = _context.User.Find(int.Parse(userId));
             return user;
         }
 
         #endregion
+
     }
 }
